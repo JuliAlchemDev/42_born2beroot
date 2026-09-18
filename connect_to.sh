@@ -43,11 +43,11 @@ choose_service() {
     fi
 }
 
-if [ -z $1 ] ||  [[ "$1" =~ ^(-?help|--help)$ ]]; then
+if [ -z "$1"] ||  [[ "$1" =~ ^(-?help|--help)$ ]]; then
     show_help
 else
     set_server_ip
-    choose_service $1
+    choose_service "$1"
 fi
 
 

@@ -34,4 +34,44 @@ Defaults        logfile="/var/log/sudo/sudo.log"
 
 [More Info on GeeksforGeeks...](https://www.geeksforgeeks.org/linux-unix/sudo-command-in-linux-with-examples/)
 
+## 2. Users, Groups & Hostname
 
+```bash
+System
+  |
+  └── Hostname  # $ hostname
+        |
+        └── iualkhim42
+              |
+              └── User # $ whoami
+                    |
+                    └── iualkhim
+                          |
+                          └── Groups # $ groups iualkhim
+                                |
+                                └── iualkhim sudo users user42 ...
+```
+
+| Hostname | User | Group |
+| ------- | --------------| ------------|
+| - identifies the machine on the network | - account identifies a person or service on the system | - used to organize users and assign permissions
+| `hostnamectl` | `adduser "name"` | `groups "name"` |
+| `hostname` | `deluser "name"` | `groupadd "name"`
+| `hostnamectl set-hostname "new_name"`| `deluser --remove-home "name"` | `groupdel "name"`|
+
+```bash
+$ usermod -aG user42,sudo "name"
+
+# -a: append the groups without removing existing memberships
+# -G: specify supplementary groups
+# Multiple groups are separated by commas, without spaces
+```
+
+#### System files
+Linux stores information about users and groups in specific system files:
+
+| File | Info |
+--------------| ------------|
+| `cat /etc/passwd` | - contains info about the users configured on the system |
+| `cat /etc/group` | - contains info about the groups configured on the system |
+| `ls /home` | - shows personal home directories

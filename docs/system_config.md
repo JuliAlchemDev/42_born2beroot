@@ -34,7 +34,7 @@ Defaults        logfile="/var/log/sudo/sudo.log"
 
 [More Info on GeeksforGeeks...](https://www.geeksforgeeks.org/linux-unix/sudo-command-in-linux-with-examples/)
 
-## 2. Users, Groups & Hostname
+### Users, Groups & Hostname
 
 ```bash
 System
@@ -71,7 +71,77 @@ $ usermod -aG user42,sudo "name"
 Linux stores information about users and groups in specific system files:
 
 | File | Info |
---------------| ------------|
+|--------------| ------------|
 | `cat /etc/passwd` | - contains info about the users configured on the system |
 | `cat /etc/group` | - contains info about the groups configured on the system |
-| `ls /home` | - shows personal home directories
+| `ls /home` | - shows personal home directories |
+
+### Password Policy
+
+- **cmd: `man -k password | grep config`**, searches the manual pages for information related to password configuration.
+
+| Source| Definition |
+| --------------| ------------|
+| `/etc/login.defs` | - defines password aging and expiration rule |
+| `pwquality` | - applies password complexity and validation rules
+
+#### 1st Layer: Aging
+
+To define default password-aging settings for newly created users edit `nano /etc/login.defs`. Existing users may need `chage` to apply or update their password-aging settings.
+
+| Control | Command |
+| --------------| ------------|
+| PASS_MAX_DAYS 30 | `chage -M 30 "name"` |
+| PASS_MIN_DAYS 2 | `chage -m 2 "name"` |
+| PASS_WARN_AGE 7 | `chage -W 7 "name"` |
+
+```bash
+$ chage -l iualkhim
+
+Last password change                                    : Sep 08, 2026
+Password expires                                        : Oct 08, 2026
+Minimum number of days between password change          : 2
+Maximum number of days between password change          : 30
+Number of days of warning before password expires       : 7
+```
+
+#### 2nd Layer: Complexity & Validation Rules
+
+**PAM, pam** - Pluggable Authentication Modules for Linux.
+
+**pam_pwquality** - PAM module to perform password quality checking
+
+```bash
+# Execute command with administrative privileges
+$ apt update
+$ apt install libpam-pwquality
+```
+
+1. Check PAM config:
+```bash
+$ nano /etc/pam.d/common-password
+
+# password   requisite      pam_pwquality.so retry=3
+```
+2. Add password quality rules:
+```bash
+$ nano /etc/security/pwquality.conf
+
+# Follow comments to config new password rules
+```
+
+3. Apply the rules:
+```bash
+$ passwd "name"
+
+# user → provides old password → difok comparison possible ✓
+# root → does not provide old password → difok comparison not possible ✗
+```
+| root | user |
+| --------------| ------------|
+| $ `passwd root` | $ `passwd iualkhim` |
+| New password: | Current password: |
+| Retype new password:  | New password: |
+|                        | Retype new password: |
+
+

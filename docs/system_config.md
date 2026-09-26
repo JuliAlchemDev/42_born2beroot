@@ -134,6 +134,7 @@ $ nano /etc/security/pwquality.conf
 ```bash
 $ passwd "name"
 
+# Difok: Root vs User
 # user → provides old password → difok comparison possible ✓
 # root → does not provide old password → difok comparison not possible ✗
 ```
@@ -144,4 +145,53 @@ $ passwd "name"
 | Retype new password:  | New password: |
 |                        | Retype new password: |
 
+### SSH & Port Forwarding & Usage
 
+#### SSH (Secure Shell)
+Allows us to securely connect to and manage system remotely.
+To accept SSH connections, the system needs an SSH server:
+
+```bash
+$ apt update
+$ apt install openssh-server
+
+#            Debian
+#       ┌───────┴───────┐
+#       │               │
+#      ──→ sshd         │
+#       |    ssh client ──→
+#       │               │
+#       └───────────────┘
+
+$ systemctl status ssh
+```
+- **ssh**  - client used to initiate an SSH connection.
+- **sshd** - SSH daemon (server) that listens for and handles incoming SSH connections.
+
+```bash
+# SSH Configuration
+
+$ nano /etc/ssh/sshd_config
+┌──────────────────┐
+| PORT: 4242       | # defines the port used by the SSH server
+| PermitRootLog no | # prevents direct SSH login as root
+└──────────────────┘
+$ sshd -t #checks for errors
+
+# Restart to apply the changes
+$ systemctl restart ssh
+```
+
+#### Port Forwarding
+- **Virtual Box** ─→ **Settings** ─→ **Network** ─→ **Port Forwarding**
+
+| Name  | Host  |  Guest |
+| ----- | ------| -------|
+| ssh   | 4241  | 4242   |
+
+### Usage
+Once configured, we can use SSH services to remotely access and manage the Debian system.
+
+- **cmd: `ssh iualkhim@192.0.2.11 -p 4241`**, connects as iualkhim to the host IP through port 4241, which VirtualBox forwards to port 4242 of the Debian VM.
+
+- **cmd: `scp -P 4241 -r ./docs iualkhim@192.0.2.11:/home/iualkhim/`**, copies the docs folder from the local machine to the SSH server.

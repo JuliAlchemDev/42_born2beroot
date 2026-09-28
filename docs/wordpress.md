@@ -175,7 +175,7 @@ SELECT USER();
 SELECT CURRENT_USER();
 ```
 
-#### Permissions 
+#### Permissions
 ```sql
 -- Check WordPress user permissions:
 SHOW GRANTS FOR 'wp_user'@'localhost';
@@ -188,3 +188,107 @@ SHOW GRANTS FOR 'root'@'localhost';
 -- Check root authentication information
 SELECT User, Host, authentication_string FROM mysql.user WHERE User = 'root';
 ```
+
+### WordPress
+
+#### Preparation
+
+Before installing **WordPress**, we first check the Debian package and prepare the tools required for a manual installation.
+
+```bash
+$ sudo apt update
+# Check the package version and availability:
+$ sudo apt policy wordpress
+
+# Check its dependencies:
+$ apt install --simulate wordpress
+
+# Important: The Debian WordPress package pulls Apache and libapache2-mod-php, so it is not suitable for this project because Apache is excluded.
+```
+
+Therefore, we install WordPress manually.
+
+```bash
+$ sudo apt install wget zip
+```
+- **utils: `wget`**, command-line utility used to download files from the web.
+
+- **utils: `zip` / `unzip`**, command-line utilities used to compress files into and extract files from ZIP archives.
+
+#### Package Download
+
+- [Spanish version](https://es.wordpress.org/latest-es_ES.zip)
+- [General version](https://wordpress.org/latest.zip)
+
+```bash
+# Download:
+$ wget https://wordpress.org/latest.zip
+# Extract:
+$ unzip latest.zip
+# The WordPress files are placed in:
+$ /var/www/html/wordpress
+```
+
+#### Web Installation
+
+Open the site in the browser:
+```txt
+http://192.168.1.48/wordpress
+```
+Follow the steps in the WordPress web interface to complete the installation.
+
+#### Configure WordPress
+WordPress needs a database and a dedicated database user. It uses wp-config.php to store the database connection settings.
+
+|   **WordPress**   |  **MariaDB Value**  | **Check** |
+| --------------| ------------| ------------|
+| Database Name | (wordpress_db) | SHOW DATABASES; |
+| Username      |    (wp_user)   | SELECT User, Host FROM mysql.user; |
+| Password      |    (wordpress) |                 |
+| Database Host |   (localhost)  |                 |
+| Table Prefix |      (wp_)      |                 |
+
+```bash
+# Important: wp_user must have privileges on: wordpress_db.*
+```
+
+### Manual Configuration
+WordPress uses wp-config.php to store the database connection settings.
+```bash
+# Create it from the sample file:
+$ cd /var/www/html/wordpress
+$ sudo cp wp-config-sample.php wp-config.php
+$ sudo nano wp-config.php
+```
+
+```php
+// Set the database values:
+
+define( 'DB_NAME', 'wordpress_db' );
+define( 'DB_USER', 'wp_user' );
+define( 'DB_PASSWORD', '[database password]' );
+define( 'DB_HOST', 'localhost' );
+```
+
+#### Complete the Installation: **WordPress administrator**
+
+| **Setting** | **Value**  |
+| ------------| ------------|
+| Site Title  |   Iualkhim WP |
+| Username    |   wp_iualkhim |
+| Password    |   wp_iualkhim_... |
+| Your Email  |   email@gmail.com |
+
+The WordPress username and password are different from the MariaDB credentials.
+
+```
+MariaDB
+└── wp_user
+    └── connects WordPress to wordpress_db
+
+WordPress
+└── wp_iualkhim
+    └── logs into the WordPress Dashboard
+```
+
+After completing the installation, the WordPress Dashboard should be accessible.

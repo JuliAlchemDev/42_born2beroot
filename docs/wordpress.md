@@ -136,3 +136,55 @@ Create a .php file inside Lighttpd's document root: `$ nano /var/www/html/test.p
 # Lighttpd is successfully serving PHP through FastCGI.
 ```
 
+### MariaDB
+
+The **relational database** management system used by WordPress to store and manage website data, such as posts, users, settings, comments, and other application information.
+
+#### Installation & Configuration
+| **Command** | **Purpose**  |
+| --------------| ------------|
+| `apt update` | - update package information |
+| `sudo apt install mariadb-server`| - install MariaDB |
+| `mariadb --version` | - check installed version |
+|`sudo systemctl status mariadb` | - check service status |
+| `sudo systemctl is-enabled mariadb` | - check if service starts at boot |
+| `sudo systemctl enable mariadb` | - enable MariaDB to start at boot |
+
+#### Basic navigation
+
+| **Command** | **Purpose**  |
+| --------------| ------------|
+| `mariadb` | - enter the MariaDB client using the default authentication |
+| `mariadb -u wp_user -p` | - connect as the WordPress database user |
+| `exit` | - exit the MariaDB client |
+
+#### Database & User Configuration
+```sql
+-- Show existing database users and their authentication method
+SELECT User, Host, plugin FROM mysql.user;
+
+-- Create the WordPress database
+CREATE DATABASE wordpress_db;
+-- SHOW DATABASES;
+
+-- Create the WordPress database user
+CREATE USER 'wp_user'@'localhost' IDENTIFIED BY 'wordpress'; -- password included
+-- CREATE USER wp_user@localhost; -- no password
+
+SELECT USER();
+SELECT CURRENT_USER();
+```
+
+#### Permissions 
+```sql
+-- Check WordPress user permissions:
+SHOW GRANTS FOR 'wp_user'@'localhost';
+-- Grant the WordPress user full access to the WordPress database:
+GRANT ALL PRIVILEGES ON wordpress_db.* TO wp_user@localhost;
+
+-- Check root privileges
+SHOW GRANTS FOR 'root'@'localhost';
+
+-- Check root authentication information
+SELECT User, Host, authentication_string FROM mysql.user WHERE User = 'root';
+```

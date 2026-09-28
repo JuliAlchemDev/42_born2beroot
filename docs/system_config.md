@@ -1,9 +1,18 @@
 # System Configuration
 
 ## Overview
+The system configuration focuses on securing and managing the Debian machine. It covers 5 main areas:
+
+| Area | What it answers |
+|------|------------------|
+| [**Sudo & Privileges**](#sudo-superuser-do) | Who can perform administrative actions and how are they controlled? |
+| [**Users & Groups**](#users-groups--hostname) | Who can access the system and how are permissions organized? |
+| [**Password Policy**](#password-policy) | How are passwords protected and managed? |
+| [**Remote Access**](#ssh--port-forwarding) | How can the system be accessed remotely? |
+| [**Network Security**](#firewall) | Which network connections are allowed or blocked? |
 
 ### Sudo (Superuser Do)
-Allows an authorized user to execute commands with administrative (superuser) privileges. Without logging in directly as the root user.
+Allows an authorized user to execute commands with administrative (superuser) privileges without logging in directly as the root user.
 
 ```bash
 $ sudo -V # show sudo version
@@ -24,13 +33,13 @@ Defaults        iolog_dir=/var/log/sudo
 Defaults        logfile="/var/log/sudo/sudo.log"
 ```
 
-#### Sudo vs `su -s` vs `su root`
+#### Sudo vs `sudo -s` vs `su -`
 
 | Command | Meaning       | Why / When |
 | ------- | --------------| ------------|
 | `sudo`   | - execute command with administrative privileges | ✅ Preferred for individual administrative commands; activity can be logged |
-| `sudo -s`   | - open shell with administrative privileges |⚠️ Use with care, all commands run with elevated privileges, **no logs** |
-| `su root`   | - switch to root user | ⚠️ Avoid for normal administration; opens a full root shell, giving every command maximum privileges |
+| `sudo -s`   | - open shell with administrative privileges |⚠️ Use with care; all commands run with elevated privileges, **no logs** |
+| `su -`   | - switch to root user | ⚠️ Avoid for normal administration; opens a full root shell, giving every command maximum privileges |
 
 [More Info on GeeksforGeeks...](https://www.geeksforgeeks.org/linux-unix/sudo-command-in-linux-with-examples/)
 
@@ -145,7 +154,7 @@ $ passwd "name"
 | Retype new password:  | New password: |
 |                        | Retype new password: |
 
-### SSH & Port Forwarding & Usage
+### SSH & Port Forwarding
 
 #### SSH (Secure Shell)
 Allows us to securely connect to and manage system remotely.
@@ -172,10 +181,10 @@ $ systemctl status ssh
 # SSH Configuration
 
 $ nano /etc/ssh/sshd_config
-┌──────────────────┐
-| PORT: 4242       | # defines the port used by the SSH server
-| PermitRootLog no | # prevents direct SSH login as root
-└──────────────────┘
+┌────────────────────┐
+| Port: 4242         | # defines the port used by the SSH server
+| PermitRootLogin no | # prevents direct SSH login as root
+└────────────────────┘
 $ sshd -t #checks for errors
 
 # Restart to apply the changes
@@ -189,9 +198,29 @@ $ systemctl restart ssh
 | ----- | ------| -------|
 | ssh   | 4241  | 4242   |
 
-### Usage
-Once configured, we can use SSH services to remotely access and manage the Debian system.
+### Firewall
+
+A **firewall** is a security system that controls network traffic entering or leaving a computer. It allows or blocks connections according to defined rules, helping to prevent unauthorized access.
+
+**UFW (Uncomplicated Firewall)** — a program for managing a Netfilter firewall through a simple command-line interface. We use it to configure the firewall rules of our system.
+
+```bash
+# Execute command with administrative privileges
+$ apt update
+$ apt install ufw
+
+$ ufw --version
+```
+
+| Check status         | Define defaults              | Define rules         | Activate             |
+| -------------------- | ---------------------------- | -------------------- | -------------------- |
+| `ufw status`         | `ufw default deny incoming`  | `ufw allow 4242/tcp` | `ufw enable`         |
+| `ufw status verbose` | `ufw default allow outgoing` | `ufw show added`     | `ufw status verbose` |
+
+### Connecting the dots: SSH & Firewall Usage
+Once **SSH** and the **firewall** are configured, we can remotely access and manage the Debian system.
 
 - **cmd: `ssh iualkhim@192.0.2.11 -p 4241`**, connects as iualkhim to the host IP through port 4241, which VirtualBox forwards to port 4242 of the Debian VM.
 
 - **cmd: `scp -P 4241 -r ./docs iualkhim@192.0.2.11:/home/iualkhim/`**, copies the docs folder from the local machine to the SSH server.
+

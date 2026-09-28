@@ -7,11 +7,11 @@ a fast, at-a-glance health check — not deep diagnostics — covering 5 areas:
 
 | Area | What it answers |
 |------|------------------|
-| **System** | What am I running on? (architecture, physical CPU / vCPU, last boot) |
-| **Resource Usage** | How loaded is it right now? (CPU load, RAM, disk) |
-| **Storage** | How is space actually allocated? (LVM usage) |
-| **Users & Sessions** | Who's on the machine, and what have they done? (logged-in users, sudo history) |
-| **Network** | How is it reachable? (IP, MAC, TCP connections) |
+| [**System**](#system) | What am I running on? (architecture, physical CPU / vCPU, last boot) |
+| [**Resource Usage**](#resource-usage) | How loaded is it right now? (CPU load, RAM, disk) |
+| [**Storage**](#storage) | How is space actually allocated? (LVM usage) |
+| [**Users & Sessions**](#users--sessions) | Who's on the machine, and what have they done? (logged-in users, sudo history) |
+| [**Network**](#network) | How is it reachable? (IP, MAC, TCP connections) |
 
 
 ## Command Reference

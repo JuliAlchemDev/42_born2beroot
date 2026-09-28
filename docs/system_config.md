@@ -92,7 +92,7 @@ Linux stores information about users and groups in specific system files:
 | Source| Definition |
 | --------------| ------------|
 | `/etc/login.defs` | - defines password aging and expiration rule |
-| `pwquality` | - applies password complexity and validation rules
+| `pwquality` | - applies password complexity and validation rules |
 
 #### 1st Layer: Aging
 

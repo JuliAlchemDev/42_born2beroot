@@ -233,7 +233,7 @@ $ /var/www/html/wordpress
 
 Open the site in the browser:
 ```txt
-http://192.168.1.48/wordpress
+http://192.0.2.11/wordpress
 ```
 Follow the steps in the WordPress web interface to complete the installation.
 

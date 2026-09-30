@@ -10,6 +10,7 @@ The system configuration focuses on securing and managing the Debian machine. It
 | [**Password Policy**](#password-policy) | How are passwords protected and managed? |
 | [**Remote Access**](#ssh--port-forwarding) | How can the system be accessed remotely? |
 | [**Network Security**](#firewall) | Which network connections are allowed or blocked? |
+| [**Locale Configuration**](#locale-configuration) | How is the system locale configured to provide predictable command-line behavior? |
 
 ### Sudo (Superuser Do)
 Allows an authorized user to execute commands with administrative (superuser) privileges without logging in directly as the root user.
@@ -224,3 +225,14 @@ Once **SSH** and the **firewall** are configured, we can remotely access and man
 
 - **cmd: `scp -P 4241 -r ./docs iualkhim@192.0.2.11:/home/iualkhim/`**, copies the docs folder from the local machine to the SSH server.
 
+---
+### Locale Configuration
+
+To avoid locale warnings in some commands, set the `C` locale for the current session:
+
+```bash
+export LANG=C
+export LC_ALL=C
+```
+
+`C` is the standard Unix locale. These settings are temporary and only apply to the current shell session.

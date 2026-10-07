@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Before running this script, make sure you have created a config.local file
+# and defined your server IP address, for example:
+# SERVER_IP=192.0.2.11
+
+
 # PORTS
 PORT_VB=4241 # VirtualBox
 PORT_WP=80 # WordPress

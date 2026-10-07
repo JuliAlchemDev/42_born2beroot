@@ -69,6 +69,8 @@ System
 | `hostname` | `deluser "name"` | `groupadd "name"`
 | `hostnamectl set-hostname "new_name"`| `deluser --remove-home "name"` | `groupdel "name"`|
 
+- Changing the **hostname** with hostnamectl updates the system hostname, but `/etc/hosts` may also need to be updated so the new hostname can be resolved locally.
+
 ```bash
 $ usermod -aG user42,sudo "name"
 

@@ -9,24 +9,28 @@
   /* ================================
    COLORS
 
-   - Add your custom palette here
-   - Keep the primary / neutral / basic color division
+   - Primary / neutral / basic division
    ================================ */
 
-  /* Neutral  */
+  /* Primary */
+  --clr-accent: #4db8ff;
 
-  --clr-bg: #070e39;
-  --clr-bg-secondary: #0F1A52;
-  --clr-txt-accent: #00C2FF;
-
-
+  /* Neutral */
+  --clr-bg: #0a1038; /* page background */
+  --clr-surface: #0f1a4d; /* cards, frames */
+  --clr-shadow: #050824; /* hard shadows, dark labels */
+  --clr-txt: #c9d1e6;
+  --clr-txt-muted: #7480a8;
+   --clr-accent-dim: #2d97dc;
+   --clr-coral: #f09a93;
+   --clr-error: #e63946;
+  /* Basic */
+  --clr-white: #fff;
 
   /* ================================
    SPACING
 
-    - Clean up or extend spacing tokens as needed
-    - Keep consistent incremental scale (0, 100, 200, 300…)
-    - Add new values specific to the project if required
+    - Consistent incremental scale (0, 100, 200, 300…)
    ================================ */
 
   --spacing-0: 0; /* 0px */
@@ -51,84 +55,103 @@
   --spacing-1000: 5rem; /* 80px */
 
   /* ================================
-   TYPOGRAPHY
+   LAYOUT
 
-    - Important: always include fallback font families
-    - Recommended fallbacks: sans-serif / serif
+    - Overridden per breakpoint at the bottom of this file
    ================================ */
 
-  --ff-base: "Space Mono", monospace;
+  --container-max: 90rem; /* 1440px */
+  --page-padding: var(--spacing-300);
+  --section-gap: var(--spacing-500);
+
+  /* ================================
+   TYPOGRAPHY
+   ================================ */
+
+  --ff-base: "JetBrains Mono", monospace;
+  --ff-heading: "Montserrat", sans-serif;
 
   /* ================================
    FONT WEIGHTS
-
-    - Clean up or extend core weight tokens as needed
-    - Add new values specific to the project if required
    ================================ */
 
   --fw-regular: 400;
+  --fw-semibold: 600;
   --fw-bold: 700;
+  --fw-extrabold: 800;
+  --fw-black: 900;
 
   /* ================================
    LETTER SPACING
-
-   - Define none / tight / loose presets
-   - Use rem units for better scaling across sizes
    ================================ */
 
-  --ls-none: 0; /* 0 */
-  --ls-loose: 0.16rem; /* 2.5px */
+  --ls-none: 0;
+  --ls-tight: -0.02em;
+  --ls-snug: -0.01em;
+  --ls-wide: 0.08em;
+  --ls-wider: 0.1em;
 
   /* ================================
    FONT SIZES
 
-   - Match naming to your design tool (e.g., Figma presets)
-   - Use relative units for responsive scaling
-   - Add project-specific values as needed
+   - Preset 1 is the largest; 1 and 2 are fluid (mobile -> desktop)
    ================================ */
 
-  --fs-preset-1: 1.625rem; /* 26px */
-  --fs-preset-2: 1.375rem; /* 22px */
-  --fs-preset-3: 1.125rem; /* 18px */
-  --fs-preset-3-mobile: 0.8125rem; /* 13px */
-
-  --fs-preset-4: 1rem; /* 16px */
-  --fs-preset-5: 1rem; /* 16px */
-  --fs-preset-6: 0.9375rem; /* 15px */
-  --fs-preset-7: 0.8125rem; /* 13px */
-  --fs-preset-8: 0.8125rem; /* 13px */
+  --fs-preset-1: clamp(2rem, 1.25rem + 3.2vw, 3.5rem); /* 32 -> 56px · hero title */
+  --fs-preset-2: clamp(1.5rem, 1rem + 2.1vw, 2.5rem); /* 24 -> 40px · section title */
+  --fs-preset-3: 1.75rem; /* 28px · card title */
+  --fs-preset-4: 1.375rem; /* 22px · tagline */
+  --fs-preset-5: 1rem; /* 16px · body */
+  --fs-preset-6: 0.875rem; /* 14px · card text */
+  --fs-preset-7: 0.625rem; /* 10px · labels */
 
   /* ================================
    LINE HEIGHTS
-
-   - Keep ratios (1.35 / 1.5 / 1.6) consistent with typography scale
-   - Adjust per component type if necessary
    ================================ */
 
   --lh-100: 1;
   --lh-120: 1.2;
   --lh-140: 1.4;
   --lh-150: 1.5;
+  --lh-160: 1.6;
 
-/* ================================
+  /* ================================
    RADIUS
-
-   - Keep ratios (1.35 / 1.5 / 1.6) consistent with typography scale
-   - Adjust per component type if necessary
    ================================ */
 
-  --radius-0: 0;
-  --radius-4: 4px;
-  --radius-6: 6px;
-  --radius-8: 8px;
-  --radius-10: 10px;
-  --radius-12: 12px;
-  --radius-16: 16px;
-  --radius-20: 20px;
-  --radius-24: 24px;
-  --radius-full: 999px;
+  --radius-1: 1px;
+
+  /* ================================
+   BORDERS
+   ================================ */
+
+  --bw-frame: 0.625rem; /* 10px */
+
+  /* ================================
+   SHADOWS
+
+   - Hard offset shadows (no blur)
+   ================================ */
+
+  --shadow-sm: 3px 3px 0 var(--clr-shadow);
+  --shadow-md: 6px 6px 0 var(--clr-shadow);
+  --shadow-accent: 7px 7px 0 var(--clr-accent);
+
+  /* Test */
+  --shadow-accent-lg: 1rem 1rem 0 var(--clr-accent);
 }
 
+/* Tablet */
+@media (min-width: 48rem) {
+  :root {
+    --page-padding: var(--spacing-800);
+  }
+}
 
-
-
+/* Desktop */
+@media (min-width: 90rem) {
+  :root {
+    --page-padding: var(--spacing-1000);
+    --section-gap: var(--spacing-800);
+  }
+}

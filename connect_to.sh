@@ -6,7 +6,7 @@
 
 
 # PORTS
-PORT_VB=4241 # VirtualBox
+PORT_VB=4242 # VirtualBox
 PORT_WP=80 # WordPress
 PORT_N8N=5678 # n8n
 

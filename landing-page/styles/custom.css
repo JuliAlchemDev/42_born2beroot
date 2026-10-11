@@ -8,12 +8,11 @@
 
   /* ================================
    COLORS
-
-   - Primary / neutral / basic division
    ================================ */
 
   /* Primary */
   --clr-accent: #4db8ff;
+  --clr-accent-dim: #2d97dc;
 
   /* Neutral */
   --clr-bg: #0a1038; /* page background */
@@ -21,9 +20,11 @@
   --clr-shadow: #050824; /* hard shadows, dark labels */
   --clr-txt: #c9d1e6;
   --clr-txt-muted: #7480a8;
-   --clr-accent-dim: #2d97dc;
-   --clr-coral: #f09a93;
-   --clr-error: #e63946;
+
+  /* Feedback */
+  --clr-coral: #f09a93;
+  --clr-error: #e63946;
+
   /* Basic */
   --clr-white: #fff;
 
@@ -71,32 +72,22 @@
   --ff-base: "JetBrains Mono", monospace;
   --ff-heading: "Montserrat", sans-serif;
 
-  /* ================================
-   FONT WEIGHTS
-   ================================ */
-
+  /* Font weights */
   --fw-regular: 400;
   --fw-semibold: 600;
   --fw-bold: 700;
   --fw-extrabold: 800;
   --fw-black: 900;
 
-  /* ================================
-   LETTER SPACING
-   ================================ */
-
+  /* Letter spacing */
   --ls-none: 0;
   --ls-tight: -0.02em;
   --ls-snug: -0.01em;
   --ls-wide: 0.08em;
   --ls-wider: 0.1em;
 
-  /* ================================
-   FONT SIZES
-
-   - Preset 1 is the largest; 1 and 2 are fluid (mobile -> desktop)
-   ================================ */
-
+  /* Font sizes
+     - Preset 1 is the largest; 1 and 2 are fluid (mobile -> desktop) */
   --fs-preset-1: clamp(2rem, 1.25rem + 3.2vw, 3.5rem); /* 32 -> 56px · hero title */
   --fs-preset-2: clamp(1.5rem, 1rem + 2.1vw, 2.5rem); /* 24 -> 40px · section title */
   --fs-preset-3: 1.75rem; /* 28px · card title */
@@ -105,10 +96,7 @@
   --fs-preset-6: 0.875rem; /* 14px · card text */
   --fs-preset-7: 0.625rem; /* 10px · labels */
 
-  /* ================================
-   LINE HEIGHTS
-   ================================ */
-
+  /* Line heights */
   --lh-100: 1;
   --lh-120: 1.2;
   --lh-140: 1.4;
@@ -116,15 +104,10 @@
   --lh-160: 1.6;
 
   /* ================================
-   RADIUS
+   RADIUS & BORDERS
    ================================ */
 
   --radius-1: 1px;
-
-  /* ================================
-   BORDERS
-   ================================ */
-
   --bw-frame: 0.625rem; /* 10px */
 
   /* ================================
@@ -136,8 +119,6 @@
   --shadow-sm: 3px 3px 0 var(--clr-shadow);
   --shadow-md: 6px 6px 0 var(--clr-shadow);
   --shadow-accent: 7px 7px 0 var(--clr-accent);
-
-  /* Test */
   --shadow-accent-lg: 1rem 1rem 0 var(--clr-accent);
 }
 

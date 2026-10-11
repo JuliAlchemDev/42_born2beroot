@@ -5,11 +5,9 @@
 /* ---------- Base ---------- */
 
 body {
-  min-height: 100vh;
   min-height: 100dvh; /* en móvil evita el salto de la barra del navegador */
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: var(--spacing-300);
   padding: var(--spacing-300) 1rem;
@@ -36,6 +34,7 @@ body::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
+
 }
 
 /* capa 1: puntos pequeños y estáticos */
@@ -158,12 +157,13 @@ main img {
   position: absolute;
   right: 15%;
   bottom: 15%;
-  width: min(500px, 74%);
+  width: min(550px, 74%);
   padding: var(--spacing-300);
   text-align: center;
   background: rgb(15 26 77 / 0.8);
   border-radius: var(--radius-1);
   box-shadow: var(--shadow-accent);
+  z-index: 2;
 }
 
 .message__title {
@@ -172,18 +172,79 @@ main img {
   font-weight: var(--fw-bold);
   line-height: var(--lh-120);
   letter-spacing: var(--ls-wide);
+  word-spacing: -0.35em;
+  text-transform: uppercase;
+}
+.hero {
+  padding: var(--spacing-025) var(--spacing-150);
+  background-color: var(--clr-accent);
+  color: var(--clr-shadow);
+  border-radius: var(--radius-1);
+  box-shadow: var(--shadow-sm);
   text-transform: uppercase;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .hero {
+    animation: host-on 1.2s steps(5) infinite;
+    animation-delay: 3s;
+  }
+}
+@keyframes host-on {
+  0% {
+    opacity: 0;
+    box-shadow: none;
+  }
+  2.9% {
+    opacity: 1;
+    box-shadow: 0 0 12px var(--clr-accent);
+  }
+  4.6% {
+    opacity: 0;
+    box-shadow: none;
+  }
+  8% {
+    opacity: 0.9;
+    box-shadow: 0 0 6px var(--clr-accent);
+  }
+  9.7% {
+    opacity: 0.1;
+    box-shadow: none;
+  }
+  12.5% {
+    opacity: 1;
+    box-shadow: 0 0 14px var(--clr-accent);
+  }
+  14.3% {
+    opacity: 0.3;
+    box-shadow: 0 0 4px var(--clr-accent);
+  }
+  16.5% {
+    opacity: 1;
+    box-shadow: 0 0 10px var(--clr-accent);
+  }
+  28.5%,
+  100% {
+    opacity: 1;
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero {
+    animation: host-on 4.2s steps(5) infinite;
+  }
+}
 .message__text {
-  margin-block-end: var(--spacing-250);
+  margin-block: var(--spacing-150);
+  margin-block-end: var(--spacing-300);
   color: var(--clr-txt-muted);
 }
 
 .message__link {
   display: inline-flex;
   align-items: center;
-  padding: var(--spacing-100) var(--spacing-150);
+  padding: var(--spacing-050) var(--spacing-100);
   color: var(--clr-accent);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-wider);
@@ -192,17 +253,69 @@ main img {
   background-color: var(--clr-bg);
   border-radius: var(--radius-1);
   box-shadow: var(--shadow-md);
+  word-spacing: -0.25em;
+
 }
 
 .message__link-icon {
-  margin-inline-end: var(--spacing-200);
+  margin-inline-end: calc(var(--spacing-300) * -1);
+  align-self: flex-start;
   transform: scaleX(-1);
+  transition: transform 0.2s ease;
+}
+
+.message__link:hover .message__link-icon,
+.message__link:focus-visible .message__link-icon {
+  transform: translate(-3px, -3px) scaleX(-1);
 }
 
 .message__link:hover,
 .message__link:focus-visible {
   color: var(--clr-bg);
   background-color: var(--clr-accent);
+}
+
+.message__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-300);
+}
+.hero__link {
+  grid-area: link;
+  display: inline-flex;
+  align-items: center;
+  height: max-content;
+  padding: var(--spacing-050) var(--spacing-100);
+
+  background-color: var(--clr-white);
+  color: var(--clr-shadow);
+  font-size: var(--fs-preset-5);
+  font-weight: var(--fw-extrabold);
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 2px solid var(--clr-shadow);
+  border-radius: var(--radius-1);
+  box-shadow: 5px 5px 0 var(--clr-shadow);
+  box-shadow: var(--shadow-md);
+  word-spacing: -0.05em;
+
+  opacity: 0.8;
+}
+
+.hero__link svg {
+  width: 2rem;
+  height: 2rem;
+
+  align-self: end;
+  margin-inline-start: calc(var(--spacing-300) * -1);
+
+  fill: var(--clr-shadow);
+}
+
+.hero__link:hover {
+  transform: translate(3px, 3px);
+  opacity: 1;
 }
 
 /* ---------- Animaciones ---------- */

@@ -45,6 +45,26 @@ $ ls /var/www/html/
 $ nano /var/www/html/index.lighttpd.html
 ```
 
+#### Custom 404 Error Page
+
+Configure Lighttpd to serve a custom 404 error page when a requested resource cannot be found.
+
+Add the following directive to `/etc/lighttpd/lighttpd.conf`:
+
+```bash
+server.error-handler-404 = "/404.html"
+```
+
+Make sure `404.html` is located in the document root (`/var/www/html/`).
+
+Restart the server to apply the changes:
+
+```bash
+sudo systemctl restart lighttpd
+```
+
+Open [http://192.0.2.10/this-page-doesnt-exist](http://192.0.2.10/this-page-doesnt-exist) in the browser to verify that Lighttpd displays the custom 404 error page.
+
 ### PHP
 A **programming language** mainly used to develop dynamic web
 applications and interactive websites. PHP runs on the server side, meaning that the PHP code is executed by the server before the result is sent to the browser.

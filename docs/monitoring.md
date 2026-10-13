@@ -45,9 +45,9 @@ The **cron** program allows you to run scripts/commands automatically according 
 
 ```bash
 # Config
-@reboot           /path/to/script.sh   # runs once when the system boots
+@reboot      bash /path/to/script.sh   # runs once when the system boots
 
-*/10 * * * *  /path/to/script.sh # runs every 10 minutes after that
+*/10 * * * * bash /path/to/script.sh # runs every 10 minutes after that
 │ │ │ │ │
 │ │ │ │ └── day of week (0-6, Sun-Sat)
 │ │ │ └──── month (1-12)

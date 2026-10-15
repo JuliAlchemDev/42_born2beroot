@@ -12,6 +12,33 @@ The system configuration focuses on securing and managing the Debian machine. It
 | [**Network Security**](#firewall) | Which network connections are allowed or blocked? |
 | [**Locale Configuration**](#locale-configuration) | How is the system locale configured to provide predictable command-line behavior? |
 
+## Before Start
+
+Debian uses `apt` as its default package management tool. Administrative privileges are required for operations that modify the system.
+
+| Command | Meaning | Why / When |
+|---|---|---|
+| `apt update` | - refreshes the package lists. | Good practice before installing packages. |
+| `apt list --installed` | - lists installed packages. | Useful for checking which packages are available on the system. |
+| `apt install --simulate man-db` | - simulates the installation. | To preview dependencies before applying changes. |
+
+---
+
+`man` (manual) is a command-line utility that provides access to the system's documentation, explaining commands, their options and how to use them.
+
+Install the manual page system:
+
+```bash
+apt install man-db
+```
+
+| Command | Meaning |
+|---|---|
+| `man <command>` | Reads the manual page for a specific command. |
+| `man -k <keyword>` | Searches manual pages by keyword. |
+
+
+
 ### Sudo (Superuser Do)
 Allows an authorized user to execute commands with administrative (superuser) privileges without logging in directly as the root user.
 

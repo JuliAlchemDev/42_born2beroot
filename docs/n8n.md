@@ -372,3 +372,79 @@ To provide reliable DNS resolution, the n8n container was configured to use:
 | `8.8.8.8`  | Google Public DNS |
 | `1.1.1.1`  | Cloudflare DNS    |
 
+
+### Migrating n8n Data Between VMs
+```
+┌─────────────────────┐
+│  Old Debian VM      │
+│      homelab        │
+│                     │
+│ Docker volume       │
+│ n8n_n8n_data        │
+└──────────┬──────────┘
+           │
+           │ tar backup
+           ▼
+┌─────────────────────┐
+│ n8n_backup.tar.gz   │
+└──────────┬──────────┘
+           │
+           │ SCP
+           ▼
+┌─────────────────────┐
+│  New Debian VM      │
+│    iualkhim42       │
+│                     │
+│ Docker volume       │
+│ n8n_n8n_data        │
+└─────────────────────┘
+```
+Docker named volumes are independent from the Docker Compose file. Recreating the Compose configuration on another VM creates a new volume, so the previous n8n data is not automatically available. To migrate an existing n8n instance, the contents of the original volume must be copied to the new VM.
+
+1. Stop n8n on the old VM
+```bash
+sudo docker ps
+sudo docker stop n8n-n8n-1
+
+# Why?
+# n8n uses SQLite by default. Stopping the container ensures the database is not being modified while the volume is being backed up.
+```
+
+2. Create a backup of the volume
+```bash
+sudo tar -czf ~/n8n_backup.tar.gz \
+  -C /var/lib/docker/volumes/n8n_n8n_data/_data .
+```
+
+3. Transfer the backup
+```bash
+scp -P <SSH_PORT> ./n8n_backup.tar.gz \
+  iualkhim@<NEW_VM>:/home/iualkhim/
+```
+4. Stop the new n8n
+```
+sudo docker stop n8n-n8n-1
+```
+5. Backup the new volume
+```
+sudo tar -czf ~/n8n_new_volume_backup.tar.gz \
+  -C /var/lib/docker/volumes/n8n_n8n_data/_data .
+```
+6. Replace the volume contents
+```
+sudo rm -rf /var/lib/docker/volumes/n8n_n8n_data/_data/*
+
+sudo tar -xzf ~/n8n_backup.tar.gz \
+  -C /var/lib/docker/volumes/n8n_n8n_data/_data
+```
+7. Start n8n
+```
+cd /srv/n8n
+sudo docker compose up -d
+sudo docker compose ps
+```
+8. Verify
+```
+http://localhost:5678
+```
+The Compose file recreates the n8n service, but the Docker volume preserves the n8n instance data. Migrating the volume is therefore what migrates the existing n8n instance.

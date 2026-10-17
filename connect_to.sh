@@ -58,3 +58,4 @@ fi
 
 
 
+# sudo journalctl -b -p err --no-pager - check errs on boot

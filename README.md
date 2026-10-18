@@ -51,6 +51,38 @@ The bonus part includes the following additional services:
 - its huge package repository covers the bonus services (WordPress, Docker, n8n).
 - AppArmor and UFW come with Debian's ecosystem and are simple enough to configure for a single server.
 
+## Instructions
+
+1. Clone the project and enter the folder:
+```bash
+   git clone https://github.com/JuliAlchemDev/42_born2beroot.git born2beroot
+  cd born2beroot
+```
+2. Set up the virtual machine and install Debian: see [System Installation](./docs/system_install.md).
+3. Configure the system (users, sudo, SSH, firewall...): see [System Configuration](./docs/system_config.md).
+4. Once the system is ready and port forwarding is configured, get the IP address of the host machine (macOS) with `ipconfig getifaddr en0` and save it in a `config.local` file:
+```bash
+   SERVER_IP=192.0.2.11
+```
+5. Use the [connect_to script](./connect_to.sh) to connect to the VM or open its services:
+```bash
+   ./connect_to.sh [born2beroot|wordpress|n8n]
+```
+6. Set up the monitoring script: copy [monitoring.sh](./monitoring.sh) to the VM via SSH (`scp`) or configure it manually, following [Monitoring](./docs/monitoring.md).
+7. Install WordPress (Lighttpd, PHP and MariaDB): see [WordPress](./docs/wordpress.md).
+   - The Lighttpd section covers the default page and the custom 404 setup, so you can serve my [landing page sample](./landing-page/).
+8. Install Docker and n8n: see [n8n](./docs/n8n.md).
+9. Defence preparation:
+   - Once the installation and configuration are finished, shut the VM down and generate its signature:
+```bash
+     cd "$HOME/VirtualBox VMs/born2beroot"
+
+     # The SHA-1 signature shows the VM has not been modified since it was submitted
+     shasum born2beroot.vdi | cut -d ' ' -f 1 > signature.txt
+```
+
+## Resources
+
 The repository contains the configuration scripts used during the project and documentation covering the system configuration, the purpose of its components and the concepts behind them.
 
 | Documentation| Description |
@@ -60,6 +92,3 @@ The repository contains the configuration scripts used during the project and do
 |[Monitoring](./docs/monitoring.md)| - system [monitoring script](./monitoring.sh)  and cron configuration |
 |[WordPress](./docs/wordpress.md)| - WordPress setup with Lighttpd, PHP and MariaDB |
 |[n8n](./docs/n8n.md)| - Docker and n8n setup and configuration |
-
-## Instructions
-## Resources

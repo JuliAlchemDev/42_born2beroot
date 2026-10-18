@@ -9,7 +9,7 @@
 The main goal of the **Born2beroot** project
 is to create and configure a **Linux** environment inside a virtual machine.
 
-The system is build from scratch to explore the fundamentals of **system administration**, **security** and **server management**.
+The system is built from scratch to explore the fundamentals of **system administration**, **security** and **server management**.
 
 The main topics covered are ***users and groups, permissions, `sudo`, SSH, password policies, disk partitioning, encrypted volumes, LVM, firewall configuration and system monitoring***.
 
@@ -83,12 +83,32 @@ The bonus part includes the following additional services:
 
 ## Resources
 
-The repository contains the configuration scripts used during the project and documentation covering the system configuration, the purpose of its components and the concepts behind them.
+### Project Documentation
 
-| Documentation| Description |
+Notes on the system configuration, the purpose of each component and the concepts behind them.
+
+| Documentation | Description |
 | ----- | ------|
 |[System Installation](./docs/system_install.md)| - virtual machine setup and Debian installation |
 |[System Configuration](./docs/system_config.md)| - users, groups, sudo, SSH, password policy and firewall |
 |[Monitoring](./docs/monitoring.md)| - system [monitoring script](./monitoring.sh)  and cron configuration |
 |[WordPress](./docs/wordpress.md)| - WordPress setup with Lighttpd, PHP and MariaDB |
 |[n8n](./docs/n8n.md)| - Docker and n8n setup and configuration |
+
+### Scripts and files
+
+Scripts used during the project, plus a sample landing page for the web server.
+
+| File | Description |
+| ----- | ------|
+| [monitoring.sh](./monitoring.sh) | - reports system information (architecture, CPU, RAM, disk, load, last boot, LVM, connections, users, network, sudo commands) |
+| [monitoring.sh](./monitoring.sh) | - reports system information: architecture, CPU, memory, disk, load, last boot, LVM, connections, users, network and sudo commands |
+| [landing-page](./landing-page/) | - sample web page (`index.html`, `404.html`, styles and images) served by Lighttpd |
+
+
+---
+**AI Usage:** I used several AI tools as support throughout the project, always as a learning aid: all the configuration was done and understood by me.
+
+| **ChatGPT** | **Claude** | **Stitch** |
+| ----- | ------| ------|
+| - discuss concepts and experiment with system configurations <br> - document the processes <br> - generate practice questions to check my understanding | - discuss concepts and documentation once more, as a second opinion, to check my understanding <br> - structure this README and its comparison tables <br> - speed up the styles and animations of the landing page | - define the design system <br> - prototype the landing page <br> - prototype the 404 page |

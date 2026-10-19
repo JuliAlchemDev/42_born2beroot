@@ -1,7 +1,7 @@
 *This project has been created as part of the 42 curriculum by iualkhim*
 
 <p align="center">
-  <img src="./docs/srcs/born2beroot.png" alt="born2beroot 42 project badge" width="150"/>
+  <img src="https://raw.githubusercontent.com/JuliAlchemDev/42_born2beroot/main/docs/srcs/born2beroot.png" alt="born2beroot 42 project badge" width="150"/>
 </p>
 
 ## Description
@@ -58,24 +58,24 @@ The bonus part includes the following additional services:
    git clone https://github.com/JuliAlchemDev/42_born2beroot.git born2beroot
   cd born2beroot
 ```
-2. Set up the virtual machine and install Debian: see [System Installation](./docs/system_install.md).
-3. Configure the system (users, sudo, SSH, firewall...): see [System Configuration](./docs/system_config.md).
+2. Set up the virtual machine and install Debian: see [System Installation](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/system_install.md).
+3. Configure the system (users, sudo, SSH, firewall...): see [System Configuration](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/system_config.md).
 4. Once the system is ready and port forwarding is configured, get the IP address of the host machine (macOS) with `ipconfig getifaddr en0` and save it in a `config.local` file:
 ```bash
    SERVER_IP=192.0.2.11
 ```
-5. Use the [connect_to script](./connect_to.sh) to connect to the VM or open its services:
+5. Use the [connect_to script](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/connect_to.sh) to connect to the VM or open its services:
 ```bash
    ./connect_to.sh [born2beroot|wordpress|n8n]
 ```
-6. Set up the monitoring script: copy [monitoring.sh](./monitoring.sh) to the VM via SSH (`scp`) or configure it manually, following [Monitoring](./docs/monitoring.md).
-7. Install WordPress (Lighttpd, PHP and MariaDB): see [WordPress](./docs/wordpress.md).
-   - The Lighttpd section covers the default page and the custom 404 setup, so you can serve my [landing page sample](./landing-page/) -> [live demo](https://julialchemdev.github.io/42_born2beroot/).
+6. Set up the monitoring script: copy [monitoring.sh](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/monitoring.sh) to the VM via SSH (`scp`) or configure it manually, following [Monitoring](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/monitoring.md).
+7. Install WordPress (Lighttpd, PHP and MariaDB): see [WordPress](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/wordpress.md).
+   - The Lighttpd section covers the default page and the custom 404 setup, so you can serve my [landing page sample](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/landing-page/) -> [live demo](https://julialchemdev.github.io/42_born2beroot/).
 
    | **Landing** | **404** |
    |---|---|
-   | <img src="./docs/srcs/landing.png" alt="landing-page-example" width="350"/> | <img src="./docs/srcs/404.png" alt="404-page-example" width="350"/> |
-8. Install Docker and n8n: see [n8n](./docs/n8n.md).
+   | <img src="https://raw.githubusercontent.com/JuliAlchemDev/42_born2beroot/main/docs/srcs/landing.png" alt="landing-page-example" width="350"/> | <img src="https://raw.githubusercontent.com/JuliAlchemDev/42_born2beroot/main/docs/srcs/404.png" alt="404-page-example" width="350"/> |
+8. Install Docker and n8n: see [n8n](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/n8n.md).
 9. Defence preparation:
    - Once the installation and configuration are finished, shut the VM down and generate its signature:
 ```bash
@@ -93,11 +93,11 @@ Notes on the system configuration, the purpose of each component and the concept
 
 | Documentation | Description |
 | ----- | ------|
-|[System Installation](./docs/system_install.md)| - virtual machine setup and Debian installation |
-|[System Configuration](./docs/system_config.md)| - users, groups, sudo, SSH, password policy and firewall |
-|[Monitoring](./docs/monitoring.md)| - system [monitoring script](./monitoring.sh)  and cron configuration |
-|[WordPress](./docs/wordpress.md)| - WordPress setup with Lighttpd, PHP and MariaDB |
-|[n8n](./docs/n8n.md)| - Docker and n8n setup and configuration |
+|[System Installation](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/system_install.md)| - virtual machine setup and Debian installation |
+|[System Configuration](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/system_config.md)| - users, groups, sudo, SSH, password policy and firewall |
+|[Monitoring](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/monitoring.md)| - system [monitoring script](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/monitoring.sh)  and cron configuration |
+|[WordPress](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/wordpress.md)| - WordPress setup with Lighttpd, PHP and MariaDB |
+|[n8n](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/docs/n8n.md)| - Docker and n8n setup and configuration |
 
 ### Scripts and files
 
@@ -105,9 +105,9 @@ Scripts used during the project, plus a sample landing page for the web server.
 
 | File | Description |
 | ----- | ------|
-| [monitoring.sh](./monitoring.sh) | - reports system information (architecture, CPU, RAM, disk, load, last boot, LVM, connections, users, network, sudo commands) |
-| [monitoring.sh](./monitoring.sh) | - reports system information: architecture, CPU, memory, disk, load, last boot, LVM, connections, users, network and sudo commands |
-| [landing-page](./landing-page/) | - sample web page (`index.html`, `404.html`, styles and images) served by Lighttpd |
+| [monitoring.sh](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/monitoring.sh) | - reports system information (architecture, CPU, RAM, disk, load, last boot, LVM, connections, users, network, sudo commands) |
+| [monitoring.sh](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/monitoring.sh) | - reports system information: architecture, CPU, memory, disk, load, last boot, LVM, connections, users, network and sudo commands |
+| [landing-page](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/landing-page/) | - sample web page (`index.html`, `404.html`, styles and images) served by Lighttpd |
 
 
 ---

@@ -1,0 +1,28 @@
+name: Born2beroot landing page
+
+on:
+  push:
+    branches: [main]
+    paths: ["landing-page/**"]
+  workflow_dispatch:
+
+permissions:
+  content: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: gihub-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: landing-page
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

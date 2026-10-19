@@ -70,7 +70,11 @@ The bonus part includes the following additional services:
 ```
 6. Set up the monitoring script: copy [monitoring.sh](./monitoring.sh) to the VM via SSH (`scp`) or configure it manually, following [Monitoring](./docs/monitoring.md).
 7. Install WordPress (Lighttpd, PHP and MariaDB): see [WordPress](./docs/wordpress.md).
-   - The Lighttpd section covers the default page and the custom 404 setup, so you can serve my [landing page sample](./landing-page/).
+   - The Lighttpd section covers the default page and the custom 404 setup, so you can serve my [landing page sample](./landing-page/) -> [live demo](https://julialchemdev.github.io/42_born2beroot/).
+
+   | **Landing** | **404** |
+   |---|---|
+   | <img src="./docs/srcs/landing.png" alt="landing-page-example" width="350"/> | <img src="./docs/srcs/404.png" alt="404-page-example" width="350"/> |
 8. Install Docker and n8n: see [n8n](./docs/n8n.md).
 9. Defence preparation:
    - Once the installation and configuration are finished, shut the VM down and generate its signature:

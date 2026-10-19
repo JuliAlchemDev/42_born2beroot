@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  content: read
+  contents: read
   pages: write
   id-token: write
 
@@ -15,7 +15,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-      name: gihub-pages
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4

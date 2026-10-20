@@ -105,7 +105,6 @@ Scripts used during the project, plus a sample landing page for the web server.
 
 | File | Description |
 | ----- | ------|
-| [monitoring.sh](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/monitoring.sh) | - reports system information (architecture, CPU, RAM, disk, load, last boot, LVM, connections, users, network, sudo commands) |
 | [monitoring.sh](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/monitoring.sh) | - reports system information: architecture, CPU, memory, disk, load, last boot, LVM, connections, users, network and sudo commands |
 | [landing-page](https://github.com/JuliAlchemDev/42_born2beroot/blob/main/landing-page/) | - sample web page (`index.html`, `404.html`, styles and images) served by Lighttpd |
 
